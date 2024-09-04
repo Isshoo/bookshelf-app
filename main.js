@@ -99,7 +99,6 @@ function buatItemBuku(bukuBaru) {
   itemBuku.classList.add("book-item");
   itemBuku.setAttribute("data-testid", "bookItem");
   itemBuku.append(infoBuku, tombolsBuku);
-  itemBuku.setAttribute("id", `${bukuBaru.id}`);
 
   if (!bukuBaru.isComplete) {
     const tombolSelesaiDibaca = document.createElement("button");
