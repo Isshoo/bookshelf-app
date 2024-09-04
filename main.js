@@ -112,7 +112,7 @@ function buatItemBuku(bukuBaru) {
     });
 
     tombolsBuku.append(tombolSelesaiDibaca, tombolHapus, tombolEdit);
-    itemBuku.setAttribute("data-bookid", "123123123");
+    itemBuku.setAttribute("data-bookid", `${bukuBaru.id}`);
   } else {
     const tombolBelumSelesaiDibaca = document.createElement("button");
     tombolBelumSelesaiDibaca.innerText = "Belum Selesai Dibaca";
@@ -127,7 +127,7 @@ function buatItemBuku(bukuBaru) {
     });
 
     tombolsBuku.append(tombolBelumSelesaiDibaca, tombolHapus, tombolEdit);
-    itemBuku.setAttribute("data-bookid", "456456456");
+    itemBuku.setAttribute("data-bookid", `${bukuBaru.id}`);
   }
 
   return itemBuku;
