@@ -1,0 +1,170 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  color: #333;
+}
+
+input,
+button {
+  padding: 0.75rem 1rem;
+  font-size: 0.75rem;
+  border-radius: 0.25rem;
+  font-weight: bold;
+}
+
+button {
+  cursor: pointer;
+}
+
+label {
+  font-weight: bold;
+}
+
+body {
+  background-color: #f2f2f2;
+  min-height: 100vh;
+}
+
+header {
+  background-color: #333;
+  padding: 1.5rem;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+}
+header h1 {
+  color: white;
+}
+
+main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding-block: 1rem;
+  gap: 1rem;
+  width: 100%;
+  padding-inline: 8%;
+}
+
+section {
+  background-color: white;
+  padding: 1.25rem 1.5rem 1.5rem;
+  border-radius: 0.5rem;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+  max-width: 800px;
+  width: 100%;
+  margin-inline: 8%;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  align-items: center;
+  justify-content: center;
+}
+
+#bookForm {
+  width: 100%;
+  display: flex;
+  gap: 1rem;
+  flex-direction: column;
+}
+
+#bookFormTitle,
+#bookFormAuthor,
+#bookFormYear {
+  width: 100%;
+}
+
+#bookForm label {
+  display: block;
+}
+
+.check-box {
+  display: flex;
+  gap: 1rem;
+}
+
+#bookFormSubmit {
+  background-color: #333;
+  color: white;
+}
+#bookFormSubmit:hover {
+  background-color: #222;
+}
+#bookFormSubmit span {
+  color: white;
+  font-weight: bold;
+}
+
+#searchBook {
+  display: flex;
+  gap: 0.5rem;
+  width: 100%;
+  align-items: center;
+}
+
+#searchBookTitle {
+  flex: 1;
+}
+
+#searchSubmit {
+  background-color: #333;
+  color: white;
+}
+#searchSubmit:hover {
+  background-color: #222;
+}
+
+.book-list {
+  width: 100%;
+}
+
+.book-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  width: 100%;
+}
+
+.book-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.book-buttons {
+  display: flex;
+  align-self: end;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.book-buttons button {
+  padding: 0.5rem 1rem;
+}
+
+.dibaca-btn {
+  color: green;
+}
+.dibaca-btn:hover {
+  color: white;
+  background-color: green;
+}
+
+.hapus-btn {
+  color: red;
+}
+.hapus-btn:hover {
+  color: white;
+  background-color: red;
+}
+
+.edit-btn {
+  color: orange;
+}
+.edit-btn:hover {
+  color: white;
+  background-color: orange;
+}
