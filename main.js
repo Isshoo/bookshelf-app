@@ -23,9 +23,9 @@ document.addEventListener(RENDER, function () {
   for (const buku of rakBuku) {
     const elemenBuku = buatItemBuku(buku);
     if (!buku.isComplete) {
-      rakBelumSelesaiDibaca.appendChild(elemenBuku);
+      rakBelumSelesaiDibaca.append(elemenBuku);
     } else {
-      rakSudahSelesaiDibaca.appendChild(elemenBuku);
+      rakSudahSelesaiDibaca.append(elemenBuku);
     }
   }
 });
@@ -219,4 +219,14 @@ function ambilDataDariStorage() {
 
 document.addEventListener(DATA, function () {
   console.log(localStorage.getItem(STORAGE_KEY));
+});
+
+const judulBukuDicari = document.getElementById("searchBookTitle").value;
+const tombolCariBuku = document.getElementById("searchSubmit");
+
+tombolCariBuku.addEventListener("click", function (event) {
+  const bukuYangDicari = rakBuku.find((buku) => buku.title === judulBukuDicari);
+  event.preventDefault();
+  console.log(bukuYangDicari);
+  return bukuYangDicari;
 });
