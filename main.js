@@ -5,6 +5,9 @@ document.addEventListener("DOMContentLoaded", function () {
     event.preventDefault();
     tambahBuku();
   });
+  if (cekStorage()) {
+    ambilDataDariStorage();
+  }
 });
 
 const RENDER = "render-rakbuku";
@@ -37,6 +40,8 @@ function tambahBuku() {
   rakBuku.push(bukuBaru);
 
   document.dispatchEvent(new Event(RENDER));
+  document.getElementById("bookForm").reset();
+  simpanDatas();
 }
 
 function buatIdUnik() {
@@ -154,26 +159,8 @@ function hapusBuku(idBuku) {
   }
   rakBuku.splice(bukuYangDicari, 1);
   document.dispatchEvent(new Event(RENDER));
+  simpanDatas();
 }
-
-// function editBuku(idBuku) {
-//   const bukuYangDiedit = cariBuku(idBuku);
-//   if (bukuYangDiedit === null) {
-//     return;
-//   }
-//   const formEditBuku = document.getElementById("editBookForm");
-//   formEditBuku.style.display = "block";
-//   formEditBuku.setAttribute("data-bookid", idBuku);
-//   document.getElementById("editBookFormTitle").value = bukuYangDiedit.title;
-//   document.getElementById("editBookFormAuthor").value = bukuYangDiedit.author;
-//   document.getElementById("editBookFormYear").value = bukuYangDiedit.year;
-//   document.getElementById("editBookFormIsComplete").checked =
-//     bukuYangDiedit.isComplete;
-//   formEditBuku.addEventListener("submit", function (event) {
-//     event.preventDefault();
-//     editBukuSubmit();
-//   });
-// }
 
 function pindahKeSelesaiDibaca(idBuku) {
   const bukuYangAkanDipindah = cariBuku(idBuku);
@@ -182,6 +169,7 @@ function pindahKeSelesaiDibaca(idBuku) {
   }
   bukuYangAkanDipindah.isComplete = true;
   document.dispatchEvent(new Event(RENDER));
+  simpanDatas();
 }
 
 function pindahKeBelumSelesaiDibaca(idBuku) {
@@ -191,4 +179,44 @@ function pindahKeBelumSelesaiDibaca(idBuku) {
   }
   bukuYangAkanDipindah.isComplete = false;
   document.dispatchEvent(new Event(RENDER));
+  simpanDatas();
 }
+
+//STORAGE
+
+const STORAGE_KEY = "Daftar_Buku";
+const DATA = "Data_Tersimpan"; //event untuk mempermudah debugging
+
+function cekStorage() {
+  const isStorageAvailable = typeof Storage !== "undefined";
+  if (!isStorageAvailable) {
+    alert("Browser anda tidak mendukung storage local");
+    return false;
+  }
+  return true;
+}
+
+function simpanDatas() {
+  if (cekStorage()) {
+    const stringDaftarBuku = JSON.stringify(rakBuku);
+    localStorage.setItem(STORAGE_KEY, stringDaftarBuku);
+    document.dispatchEvent(new Event(DATA));
+  }
+}
+
+function ambilDataDariStorage() {
+  if (cekStorage()) {
+    const stringDaftarBuku = localStorage.getItem(STORAGE_KEY);
+    let daftarBuku = JSON.parse(stringDaftarBuku);
+    if (daftarBuku !== null) {
+      for (const buku of daftarBuku) {
+        rakBuku.push(buku);
+      }
+    }
+  }
+  document.dispatchEvent(new Event(RENDER));
+}
+
+document.addEventListener(DATA, function () {
+  console.log(localStorage.getItem(STORAGE_KEY));
+});
