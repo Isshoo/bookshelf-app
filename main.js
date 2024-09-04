@@ -1,4 +1,3 @@
-// Do your work here...
 document.addEventListener("DOMContentLoaded", function () {
   const formTambahBuku = document.getElementById("bookForm");
   formTambahBuku.addEventListener("submit", function (event) {
@@ -33,7 +32,7 @@ document.addEventListener(RENDER, function () {
 function tambahBuku() {
   const title = document.getElementById("bookFormTitle").value;
   const author = document.getElementById("bookFormAuthor").value;
-  const year = document.getElementById("bookFormYear").value;
+  const year = Number(document.getElementById("bookFormYear").value);
   const isComplete = document.getElementById("bookFormIsComplete").checked;
   const id = buatIdUnik();
   const bukuBaru = buatBukuBaru(id, title, author, year, isComplete);
@@ -223,10 +222,3 @@ document.addEventListener(DATA, function () {
 
 const judulBukuDicari = document.getElementById("searchBookTitle").value;
 const tombolCariBuku = document.getElementById("searchSubmit");
-
-tombolCariBuku.addEventListener("click", function (event) {
-  const bukuYangDicari = rakBuku.find((buku) => buku.title === judulBukuDicari);
-  event.preventDefault();
-  console.log(bukuYangDicari);
-  return bukuYangDicari;
-});
