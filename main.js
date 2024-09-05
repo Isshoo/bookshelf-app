@@ -134,21 +134,15 @@ function buatItemBuku(bukuBaru) {
 }
 
 function cariBuku(idBuku) {
-  for (const buku of rakBuku) {
-    if (buku.id === idBuku) {
-      return buku;
-    }
-  }
-  return null;
+  const findBook = (idBuku) =>
+    rakBuku.find((buku) => buku.id === idBuku) || null;
+  return findBook(idBuku);
 }
 
 function cariIndexBuku(idBuku) {
-  for (const index in rakBuku) {
-    if (rakBuku[index].id === idBuku) {
-      return index;
-    }
-  }
-  return -1;
+  const findBookIndex = (idBuku) =>
+    rakBuku.findIndex((buku) => buku.id === idBuku);
+  return findBookIndex(idBuku);
 }
 
 function hapusBuku(idBuku) {
@@ -219,7 +213,7 @@ submitCariBuku.addEventListener("submit", function (event) {
     buku.title.toLowerCase().includes(judulBukuDicari)
   );
 
-  if (bukuDicari.length > 0) {
+  if (bukuDicari.length) {
     hasilPencarian(bukuDicari);
   } else {
     document.dispatchEvent(new Event(RENDER));
@@ -267,18 +261,12 @@ function simpanDatas() {
   }
 }
 
-function ambilDataDariStorage() {
-  if (cekStorage()) {
-    const stringDaftarBuku = localStorage.getItem(STORAGE_KEY);
-    let daftarBuku = JSON.parse(stringDaftarBuku);
-    if (daftarBuku !== null) {
-      for (const buku of daftarBuku) {
-        rakBuku.push(buku);
-      }
-    }
-  }
+const ambilDataDariStorage = () => {
+  const stringDaftarBuku = localStorage.getItem(STORAGE_KEY);
+  const daftarBuku = stringDaftarBuku ? JSON.parse(stringDaftarBuku) : [];
+  rakBuku.push(...daftarBuku);
   document.dispatchEvent(new Event(RENDER));
-}
+};
 
 document.addEventListener(DATA, function () {
   console.log(localStorage.getItem(STORAGE_KEY));
