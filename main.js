@@ -202,10 +202,53 @@ function editBuku(idBuku) {
   simpanDatas();
 }
 
+const tombolCariBuku = document.getElementById("searchSubmit");
+const submitCariBuku = document.getElementById("searchBook");
+
+tombolCariBuku.addEventListener("click", function () {
+  submitCariBuku.click();
+});
+
+submitCariBuku.addEventListener("submit", function (event) {
+  event.preventDefault();
+
+  const judulBukuDicari =
+    event.target.elements.searchBookTitle.value.toLowerCase();
+
+  const bukuDicari = rakBuku.filter((buku) =>
+    buku.title.toLowerCase().includes(judulBukuDicari)
+  );
+
+  if (bukuDicari.length > 0) {
+    hasilPencarian(bukuDicari);
+  } else {
+    document.dispatchEvent(new Event(RENDER));
+  }
+
+  event.target.reset();
+});
+
+function hasilPencarian(daftarBuku) {
+  const rakBelumSelesaiDibaca = document.getElementById("incompleteBookList");
+  rakBelumSelesaiDibaca.innerHTML = "";
+
+  const rakSudahSelesaiDibaca = document.getElementById("completeBookList");
+  rakSudahSelesaiDibaca.innerHTML = "";
+
+  for (const buku of daftarBuku) {
+    const elemenBuku = buatItemBuku(buku);
+    if (!buku.isComplete) {
+      rakBelumSelesaiDibaca.append(elemenBuku);
+    } else {
+      rakSudahSelesaiDibaca.append(elemenBuku);
+    }
+  }
+}
+
 //STORAGE
 
 const STORAGE_KEY = "Daftar_Buku";
-const DATA = "Data_Tersimpan"; //event untuk mempermudah debugging
+const DATA = "Data_Tersimpan";
 
 function cekStorage() {
   const isStorageAvailable = typeof Storage !== "undefined";
@@ -240,13 +283,3 @@ function ambilDataDariStorage() {
 document.addEventListener(DATA, function () {
   console.log(localStorage.getItem(STORAGE_KEY));
 });
-
-const judulBukuDicari = document
-  .getElementById("searchBookTitle")
-  .value.toLowerCase();
-const tombolCariBuku = document.getElementById("searchSubmit");
-const submitCariBuku = document.getElementById("searchBook");
-const listBuku = document.querySelectorAll(".book-item");
-const daftarBukuIncomplete = document.getElementById("incompleteBookList");
-const daftarBukuComplete = document.getElementById("completeBookList");
-const judulBuku = document.getElementsByClassName("judul-buku");

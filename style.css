@@ -65,8 +65,9 @@ section {
 }
 
 section h2 {
-  font-weight: bold;
+  font-weight: bolder;
   border-bottom: 1px solid black;
+  color: black;
 }
 
 #bookForm {
@@ -176,7 +177,7 @@ section h2 {
 }
 .dibaca-btn:hover {
   color: white;
-  background-color: green;
+  background-color: rgb(0, 135, 0);
 }
 
 .hapus-btn {
@@ -184,7 +185,7 @@ section h2 {
 }
 .hapus-btn:hover {
   color: white;
-  background-color: red;
+  background-color: rgb(234, 0, 0);
 }
 
 .edit-btn {
