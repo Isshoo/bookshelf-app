@@ -61,6 +61,7 @@ function buatItemBuku(bukuBaru) {
   const judulBuku = document.createElement("h3");
   judulBuku.innerText = bukuBaru.title;
   judulBuku.setAttribute("data-testid", "bookItemTitle");
+  judulBuku.classList.add("judul-buku");
 
   const penulis = document.createElement("p");
   penulis.innerText = `Penulis: ${bukuBaru.author}`;
@@ -180,6 +181,27 @@ function pindahKeBelumSelesaiDibaca(idBuku) {
   simpanDatas();
 }
 
+function editBuku(idBuku) {
+  const bukuYangDicari = cariIndexBuku(idBuku);
+  if (bukuYangDicari === -1) {
+    return;
+  }
+
+  const title = document.getElementById("bookFormTitle");
+  const author = document.getElementById("bookFormAuthor");
+  const year = document.getElementById("bookFormYear");
+  const isComplete = document.getElementById("bookFormIsComplete");
+
+  title.value = rakBuku[bukuYangDicari].title;
+  author.value = rakBuku[bukuYangDicari].author;
+  year.value = rakBuku[bukuYangDicari].year;
+  isComplete.checked = rakBuku[bukuYangDicari].isComplete;
+
+  rakBuku.splice(bukuYangDicari, 1);
+  document.dispatchEvent(new Event(RENDER));
+  simpanDatas();
+}
+
 //STORAGE
 
 const STORAGE_KEY = "Daftar_Buku";
@@ -219,5 +241,12 @@ document.addEventListener(DATA, function () {
   console.log(localStorage.getItem(STORAGE_KEY));
 });
 
-const judulBukuDicari = document.getElementById("searchBookTitle").value;
+const judulBukuDicari = document
+  .getElementById("searchBookTitle")
+  .value.toLowerCase();
 const tombolCariBuku = document.getElementById("searchSubmit");
+const submitCariBuku = document.getElementById("searchBook");
+const listBuku = document.querySelectorAll(".book-item");
+const daftarBukuIncomplete = document.getElementById("incompleteBookList");
+const daftarBukuComplete = document.getElementById("completeBookList");
+const judulBuku = document.getElementsByClassName("judul-buku");
